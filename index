@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neha Muley — Specification Consultant</title>
+<meta name="description" content="Neha Muley — Specification Consultant. Product strategy, market development, and technical consulting in construction products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16283D;
+    --navy-2: #1E3752;
+    --paper: #EDE9E0;
+    --paper-2: #E2DDD1;
+    --concrete: #7C7A72;
+    --ink: #1A1A17;
+    --redline: #B23A2E;
+    --steel: #3D5A73;
+    --line: rgba(22,40,61,0.16);
+    --line-light: rgba(237,233,224,0.22);
+    --radius: 2px;
+    --gap: clamp(1.25rem, 3vw, 2.5rem);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+
+  a{color:var(--steel);}
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--redline);
+    outline-offset:3px;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--concrete);
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* ---------- SHEET INDEX NAV ---------- */
+  .index-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(237,233,224,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .index-nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:0.85rem;
+    padding-bottom:0.85rem;
+    gap:1rem;
+  }
+  .index-nav .brand{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    color:var(--navy);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .index-nav .sheets{
+    display:flex;
+    gap:1.4rem;
+    list-style:none;
+    margin:0;
+    padding:0;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .index-nav .sheets::-webkit-scrollbar{display:none;}
+  .index-nav .sheets a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    color:var(--navy);
+    white-space:nowrap;
+    opacity:0.7;
+    transition:opacity 0.15s ease, border-color 0.15s ease;
+    border-bottom:2px solid transparent;
+    padding-bottom:3px;
+  }
+  .index-nav .sheets a:hover{opacity:1; border-color:var(--redline);}
+
+  /* ---------- HERO / COVER SHEET ---------- */
+  .cover{
+    position:relative;
+    background:var(--navy);
+    color:var(--paper);
+    overflow:hidden;
+    background-image:
+      linear-gradient(var(--line-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-light) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  .cover::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse at 30% 20%, rgba(22,40,61,0) 0%, rgba(22,40,61,0.55) 75%);
+    pointer-events:none;
+  }
+  .cover-inner{
+    position:relative;
+    z-index:2;
+    padding:4.5rem 0 3rem;
+  }
+  .crosshair{
+    position:absolute;
+    width:22px; height:22px;
+    z-index:2;
+    opacity:0.55;
+  }
+  .crosshair::before, .crosshair::after{
+    content:"";
+    position:absolute;
+    background:var(--paper);
+  }
+  .crosshair::before{ width:100%; height:1px; top:50%; left:0; }
+  .crosshair::after{ height:100%; width:1px; left:50%; top:0; }
+  .crosshair.tl{ top:18px; left:18px; }
+  .crosshair.tr{ top:18px; right:18px; }
+  .crosshair.br{ bottom:18px; right:18px; }
+
+  .cover .eyebrow{
+    color:#C9A9A0;
+    margin-bottom:0.9rem;
+  }
+  .cover h1{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:clamp(3.2rem, 9vw, 6.6rem);
+    line-height:0.92;
+    letter-spacing:0.01em;
+    margin:0 0 0.6rem;
+    text-transform:uppercase;
+  }
+  .cover .role{
+    font-size:clamp(1.05rem, 2vw, 1.35rem);
+    max-width:34rem;
+    color:#D8D2C4;
+    margin:0 0 2.5rem;
+    font-weight:400;
+  }
+  .cover .role strong{color:var(--paper); font-weight:600;}
+
+  .titleblock{
+    border-top:1px solid rgba(237,233,224,0.3);
+    padding-top:1.6rem;
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:1.2rem 1.5rem;
+  }
+  .titleblock .field .label{color:#9FAFC0;}
+  .titleblock .field .val{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.88rem;
+    margin-top:0.3rem;
+    color:var(--paper);
+  }
+
+  @media (max-width:680px){
+    .titleblock{grid-template-columns:repeat(2, minmax(0,1fr));}
+  }
+
+  /* ---------- GENERIC SECTION ---------- */
+  section{
+    padding:clamp(3rem, 6vw, 5rem) 0;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  section.alt{background:var(--paper-2);}
+
+  .sheet-heading{
+    display:flex;
+    align-items:baseline;
+    gap:0.9rem;
+    margin-bottom:2.2rem;
+  }
+  .sheet-heading .num{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--redline);
+    font-size:0.85rem;
+    border:1px solid var(--redline);
+    padding:0.15rem 0.5rem;
+    border-radius:var(--radius);
+    white-space:nowrap;
+  }
+  .sheet-heading h2{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.7rem, 3.4vw, 2.3rem);
+    text-transform:uppercase;
+    margin:0;
+    letter-spacing:0.01em;
+    color:var(--navy);
+  }
+
+  /* reveal animation */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- NOTES / PROFILE ---------- */
+  .notes-block{
+    max-width:52rem;
+    font-size:1.08rem;
+    color:#2b2a26;
+    border-left:3px solid var(--redline);
+    padding-left:1.5rem;
+  }
+  .notes-block p{margin:0 0 1rem;}
+  .notes-block p:last-child{margin-bottom:0;}
+
+  /* ---------- EXPERIENCE SHEETS ---------- */
+  .job-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:1px solid var(--line);
+    padding:2rem clamp(1.2rem, 3vw, 2.2rem);
+    margin-bottom:1.4rem;
+    position:relative;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  section.alt .job-card{background:var(--paper-2);}
+  .job-card:hover{
+    transform:translateX(4px);
+    border-left-color:var(--redline);
+    box-shadow:-2px 0 0 var(--redline);
+  }
+  .job-head{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:0.6rem 1.5rem;
+    margin-bottom:1.1rem;
+  }
+  .job-head .co{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--navy);
+    margin:0;
+    text-transform:uppercase;
+  }
+  .job-head .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85rem;
+    color:var(--steel);
+    display:block;
+    margin-top:0.2rem;
+  }
+  .job-head .dates{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:var(--concrete);
+    white-space:nowrap;
+  }
+  .job-card ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    gap:0.55rem;
+  }
+  .job-card li{
+    padding-left:1.1rem;
+    position:relative;
+    font-size:0.98rem;
+    color:#3a3934;
+  }
+  .job-card li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    color:var(--redline);
+  }
+  .metric-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.9rem;
+    margin-top:1.3rem;
+  }
+  .metric{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    background:rgba(178,58,46,0.08);
+    color:var(--redline);
+    border:1px solid rgba(178,58,46,0.35);
+    padding:0.3rem 0.6rem;
+    border-radius:var(--radius);
+  }
+
+  /* ---------- LEGEND / SKILLS ---------- */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.7rem;
+  }
+  .legend .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    border:1px solid var(--navy);
+    color:var(--navy);
+    padding:0.5rem 0.85rem;
+    border-radius:var(--radius);
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+  }
+  .legend .tag::before{
+    content:"";
+    width:8px; height:8px;
+    background:var(--redline);
+    display:inline-block;
+    flex:none;
+  }
+
+  /* ---------- CERT / EDU GRID ---------- */
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:var(--gap);
+  }
+  @media (max-width:720px){ .grid-2{grid-template-columns:1fr;} }
+
+  .sub-sheet .label{margin-bottom:0.9rem; display:block;}
+  .sub-sheet ul{margin:0; padding:0; list-style:none; display:grid; gap:0.8rem;}
+  .sub-sheet li{
+    font-size:0.98rem;
+    padding-bottom:0.8rem;
+    border-bottom:1px dashed var(--line);
+  }
+  .sub-sheet li:last-child{border-bottom:none;}
+  .sub-sheet li .item-title{font-weight:600; color:var(--navy); display:block;}
+  .sub-sheet li .item-sub{color:var(--concrete); font-size:0.86rem;}
+
+  /* ---------- CONTACT / TITLEBLOCK FOOTER ---------- */
+  .contact-sheet{
+    background:var(--navy);
+    color:var(--paper);
+    background-image:
+      linear-gradient(var(--line-light) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-light) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+  .contact-sheet h2{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    text-transform:uppercase;
+    margin:0 0 0.6rem;
+    max-width:22rem;
+    line-height:1;
+  }
+  .contact-sheet .sub{
+    color:#C9C3B4;
+    max-width:30rem;
+    margin-bottom:2.4rem;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:1.6rem;
+    border-top:1px solid rgba(237,233,224,0.25);
+    padding-top:1.8rem;
+  }
+  .contact-grid a, .contact-grid span{
+    color:var(--paper);
+    text-decoration:none;
+  }
+  .contact-grid .c-label{color:#9FAFC0; display:block; margin-bottom:0.35rem;}
+  .contact-grid .c-val{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.95rem;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.15s ease;
+  }
+  .contact-grid a .c-val:hover{border-color:var(--redline);}
+
+  footer.foot{
+    text-align:center;
+    padding:1.5rem 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--concrete);
+    background:var(--navy);
+    border-top:1px solid rgba(237,233,224,0.15);
+  }
+
+  /* portrait in cover */
+  .portrait-wrap{
+    position:absolute;
+    top:0; right:0;
+    height:100%;
+    width:min(34vw, 380px);
+    z-index:1;
+    opacity:0.9;
+    -webkit-mask-image:linear-gradient(to left, black 45%, transparent 100%);
+    mask-image:linear-gradient(to left, black 45%, transparent 100%);
+  }
+  .portrait-wrap img{
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:grayscale(1) contrast(1.05) brightness(0.85);
+    mix-blend-mode:luminosity;
+  }
+  @media (max-width:820px){
+    .portrait-wrap{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="index-nav">
+  <div class="wrap">
+    <a href="#top" class="brand">N. MULEY</a>
+    <ul class="sheets">
+      <li><a href="#profile">A-002 PROFILE</a></li>
+      <li><a href="#experience">A-003 EXPERIENCE</a></li>
+      <li><a href="#legend">A-007 SKILLS</a></li>
+      <li><a href="#credentials">A-008 CREDENTIALS</a></li>
+      <li><a href="#contact">A-009 CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="cover" id="top">
+  <span class="crosshair tl" aria-hidden="true"></span>
+  <span class="crosshair tr" aria-hidden="true"></span>
+  <span class="crosshair br" aria-hidden="true"></span>
+  <div class="portrait-wrap" aria-hidden="true">
+    <img src="assets/neha.jpg" alt="">
+  </div>
+  <div class="wrap">
+    <div class="cover-inner">
+      <p class="label eyebrow">SHEET A-001 · COVER</p>
+      <h1>Neha<br>Muley</h1>
+      <p class="role">
+        <strong>Specification Consultant</strong> — product strategy, market development,
+        and technical consulting for the construction products industry.
+      </p>
+
+      <div class="titleblock">
+        <div class="field">
+          <span class="label">Project</span>
+          <span class="val">Career Specification Set</span>
+        </div>
+        <div class="field">
+          <span class="label">Discipline</span>
+          <span class="val">Product &amp; Technical Consulting</span>
+        </div>
+        <div class="field">
+          <span class="label">Location</span>
+          <span class="val">Leuven, Belgium</span>
+        </div>
+        <div class="field">
+          <span class="label">Scale</span>
+          <span class="val">6+ Years — NTS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="profile">
+  <div class="wrap">
+    <div class="sheet-heading reveal">
+      <span class="num">A-002</span>
+      <h2>General Notes</h2>
+    </div>
+    <div class="notes-block reveal">
+      <p>Commercially driven civil engineer with 6+ years supporting product strategy, market development, and technical consulting across the construction products industry — translating customer and market insight into commercial opportunity in close collaboration with architects, contractors, consultants, engineers, and marketing and sales teams.</p>
+      <p>Grounded in market research, competitor benchmarking, and voice-of-customer work, with a track record of strengthening product positioning and go-to-market execution. Focused on driving product adoption, sharpening customer experience, and supporting the full product lifecycle from specification through delivery.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="experience">
+  <div class="wrap">
+    <div class="sheet-heading reveal">
+      <span class="num">A-003</span>
+      <h2>Work Experience</h2>
+    </div>
+
+    <article class="job-card reveal">
+      <div class="job-head">
+        <div>
+          <p class="co">Hilti Group</p>
+          <span class="role">Specification Consultant</span>
+        </div>
+        <span class="dates">2022 — 2024</span>
+      </div>
+      <ul>
+        <li>Supported product strategy by gathering customer insight, tracking market trends, and recommending technical solutions across MEP, HVAC, and façade systems.</li>
+        <li>Built relationships with architects, consultants, contractors, and project stakeholders to drive product adoption and specification.</li>
+        <li>Partnered with engineering, sales, and marketing on go-to-market initiatives and product launches.</li>
+        <li>Delivered technical presentations, application guidance, and product demonstrations to strengthen customer engagement.</li>
+        <li>Managed customer opportunities through Salesforce CRM, improving reporting visibility and pipeline tracking.</li>
+      </ul>
+      <div class="metric-row">
+        <span class="metric">+25% product specifications</span>
+        <span class="metric">+40% pipeline visibility</span>
+      </div>
+    </article>
+
+    <article class="job-card reveal">
+      <div class="job-head">
+        <div>
+          <p class="co">Fischer Group</p>
+          <span class="role">Technical Consultant</span>
+        </div>
+        <span class="dates">2020 — 2022</span>
+      </div>
+      <ul>
+        <li>Supported market introduction and adoption of construction products through technical consulting and customer training.</li>
+        <li>Ran market research, competitor benchmarking, and customer analysis to surface emerging trends and commercial opportunity.</li>
+        <li>Gathered customer feedback and technical requirements to shape customer-centric positioning and market development.</li>
+        <li>Built long-term relationships with architects, consultants, and engineering firms as a trusted technical advisor.</li>
+        <li>Aligned commercial and engineering teams around customer requirements and product capability.</li>
+      </ul>
+    </article>
+
+    <article class="job-card reveal">
+      <div class="job-head">
+        <div>
+          <p class="co">Oyo</p>
+          <span class="role">Project Manager</span>
+        </div>
+        <span class="dates">2019 — 2020</span>
+      </div>
+      <ul>
+        <li>Managed 50+ cross-functional projects from planning through execution, holding the line on timeline, budget, and stakeholder alignment.</li>
+        <li>Coordinated cross-functional teams to hit business objectives and improve project performance.</li>
+      </ul>
+      <div class="metric-row">
+        <span class="metric">50+ projects delivered</span>
+      </div>
+    </article>
+
+    <article class="job-card reveal">
+      <div class="job-head">
+        <div>
+          <p class="co">Oyo</p>
+          <span class="role">Project Lead</span>
+        </div>
+        <span class="dates">2018 — 2019</span>
+      </div>
+      <ul>
+        <li>Standardized project documentation and workflows, improving delivery consistency and operational efficiency.</li>
+        <li>Supported planning and execution activities in close coordination with internal stakeholders.</li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<section id="legend">
+  <div class="wrap">
+    <div class="sheet-heading reveal">
+      <span class="num">A-007</span>
+      <h2>Legend — Skills</h2>
+    </div>
+    <div class="legend reveal">
+      <span class="tag">Product Adoption</span>
+      <span class="tag">Product Positioning</span>
+      <span class="tag">Market Intelligence</span>
+      <span class="tag">Product Launch Support</span>
+      <span class="tag">Customer Insights</span>
+      <span class="tag">Voice of Customer</span>
+      <span class="tag">Strategic Planning</span>
+      <span class="tag">Market Development</span>
+      <span class="tag">Façade Systems &amp; Building Envelope Solutions</span>
+      <span class="tag">Salesforce CRM</span>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="credentials">
+  <div class="wrap">
+    <div class="sheet-heading reveal">
+      <span class="num">A-008</span>
+      <h2>Credentials</h2>
+    </div>
+    <div class="grid-2">
+      <div class="sub-sheet reveal">
+        <span class="label">Certifications</span>
+        <ul>
+          <li>
+            <span class="item-title">Sustainable Urban Development</span>
+            <span class="item-sub">TU Delft &amp; Wageningen University — edX</span>
+          </li>
+          <li><span class="item-title">Salesforce Marketing Cloud</span></li>
+          <li><span class="item-title">AutoCAD 3D</span></li>
+          <li><span class="item-title">Product Marketing</span></li>
+        </ul>
+      </div>
+      <div class="sub-sheet reveal">
+        <span class="label">Education &amp; Languages</span>
+        <ul>
+          <li>
+            <span class="item-title">Post Graduate Diploma, Advanced Construction Management</span>
+          </li>
+          <li>
+            <span class="item-title">Bachelor of Civil Engineering</span>
+          </li>
+          <li>
+            <span class="item-title">Languages</span>
+            <span class="item-sub">English, Dutch</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-sheet" id="contact" style="border-bottom:none;">
+  <div class="wrap">
+    <p class="label eyebrow reveal" style="color:#C9A9A0;">SHEET A-009 · TITLE BLOCK</p>
+    <h2 class="reveal">Let's build the<br>next spec.</h2>
+    <p class="sub reveal">Open to specification consulting, product strategy, and technical advisory roles across the construction products industry.</p>
+
+    <div class="contact-grid reveal">
+      <a href="mailto:nvm2112@gmail.com">
+        <span class="c-label label">Email</span>
+        <span class="c-val">nvm2112@gmail.com</span>
+      </a>
+      <a href="tel:+32456544213">
+        <span class="c-label label">Phone</span>
+        <span class="c-val">+32 456 544 213</span>
+      </a>
+      <a href="https://www.linkedin.com/in/neha-muley-2a114188" target="_blank" rel="noopener">
+        <span class="c-label label">LinkedIn</span>
+        <span class="c-val">/in/neha-muley-2a114188</span>
+      </a>
+      <span>
+        <span class="c-label label">Location</span>
+        <span class="c-val">Leuven, Belgium</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  DRAWN BY N. MULEY — REV. 2026 — NOT FOR CONSTRUCTION WITHOUT CONVERSATION
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
